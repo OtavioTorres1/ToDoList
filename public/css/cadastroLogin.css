@@ -1,0 +1,89 @@
+/* login: */
+body{
+    background-color: rgb(216, 215, 215);
+}
+
+main{
+    display: flex;
+    justify-content: center;
+}
+
+.fundo{
+    background-color: white;
+    height: auto;
+    padding-bottom: 30px; 
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.headerLogin{
+    background-color: rgb(245, 242, 242);
+    width: 100%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.headerLogin h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+}
+
+.tiposDeInfos{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.tiposDeInfos p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+.tiposDeInfos a:hover{
+    color: #060341;
+}
+
+.infosUsuario{
+    display: flex;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+
+.infosUsuario label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+.infosUsuario input{
+    padding: 10px 40px;
+}
+
+.infosUsuario div{
+    display: flex;
+    flex-direction: column;
+}
+
+.enviar-btn {
+    display: inline-block;
+    align-self: center;
+    padding: 15px 70px;
+    background-color: #060341;
+    color: white;
+    text-decoration: none;
+}
+
+.cadastro-btn {
+    display: inline-block;
+    align-self: center;
+    color: #060341;
+    text-decoration: none;
+}

@@ -37,6 +37,32 @@ public function buscarCep($cep)
     ], 500);
 }
 
+public function update(Request $request, $id)
+{
+    $usuario = PerfilUsuario::findOrFail($id);
+
+    $usuario->nomeUsuario = $request->nomeUsuario;
+    $usuario->emailUsuario = $request->emailUsuario;
+    $usuario->datanascUsuario = $request->datanascUsuario;
+
+    if ($request->senhaUsuario) {
+        $usuario->senhaUsuario = bcrypt($request->senhaUsuario);
+    }
+
+    $usuario->save();
+
+    return redirect()->route('perfil');
+}
+
+public function destroy($id)
+{
+    $usuario = PerfilUsuario::findOrFail($id);
+
+    $usuario->delete();
+
+    return redirect()->route('login');
+}
+
     public function create()
     {
         //
@@ -64,13 +90,4 @@ public function buscarCep($cep)
         //
     }
 
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    public function destroy(string $id)
-    {
-        //
-    }
 }

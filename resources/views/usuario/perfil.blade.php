@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfol do Usuário</title>
+    <title>Perfil do Usuário</title>
         <link rel="stylesheet" href="{{url('css/perfil.css')}}">
 
 </head>
@@ -19,10 +19,10 @@
                 </div>
 
                 <div class="tiposDeInfos">
-                    <a href="">
+                    <a href="{{ route('perfil') }}" >
                         <p style="color: #110c81">informações básicas</p>
                     </a>
-                    <a href="">
+                    <a href="{{ route('cep') }}">
                        <p style="color: black"> informações de residencia </p>
                     </a>
                 </div>
@@ -77,6 +77,22 @@
            
             </div>
                  <a href="{{ route('editarUsuario') }}" class="editar-btn">Editar</a>
+
+                <form action="{{ route('deletarUsuario', $usuario->id) }}"
+                    method="POST"  onsubmit="return confirm('Tem certeza que deseja excluir sua conta?')">
+
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit"
+                            class="editar-btn"
+                            style="background-color: darkred;">
+
+                        Excluir Perfil
+
+                    </button>
+
+                </form>
         </div>
 
     </main>

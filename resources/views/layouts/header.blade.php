@@ -28,13 +28,6 @@
                     <p style="color: white  ;">Perfil</p>
         </a>
         </div>
-
-        <div style="Display: flex; flex-direction: column">
-            <a href="{{ route('cep') }}">
-            <!-- <img src="{{url('images/perfil.png')}}" class="iconeHeader" alt="" > -->
-                    <p style="color: white  ;">Consultar Cep</p>
-        </a>
-        </div>
     </header>
 
 </body>

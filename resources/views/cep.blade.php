@@ -20,6 +20,14 @@
                     <h1>Buscar CEP</h1>
                     <p>Digite um CEP para preencher automaticamente os dados do endereço</p>
                 </div>
+                <div class="tiposDeInfos">
+                    <a href="{{ route('perfil') }}" class="editar-btn">
+                        <p style="color: black">informações básicas</p>
+                    </a>
+                    <a href="{{ route('cep') }}" class="editar-btn">
+                       <p style="color: #110c81"> informações de residencia </p>
+                    </a>
+                </div>
             </div>
 
             <div class="infosUsuario">

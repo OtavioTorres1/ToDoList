@@ -34,7 +34,11 @@ Route::post('/NovaTarefa', [TarefasController::class, 'store'])->name('NovaTaref
 Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil');
 
 Route::get('/editarUsuario', function () {
-    return view('usuario.editarUsuario');
+
+    $usuario = \App\Models\PerfilUsuario::latest('id')->first();
+
+    return view('usuario.editarUsuario', compact('usuario'));
+
 })->name('editarUsuario');
 
 Route::get('/NovaTarefa', function () {
@@ -46,6 +50,13 @@ Route::get('/NovaTarefa', function () {
 Route::get('/buscar-cep/{cep}', [PerfilController::class, 'buscarCep']);
 
 Route::view('/cep', 'cep')->name('cep');;
+
+Route::put('/editarUsuario/{id}', [PerfilController::class, 'update'])
+    ->name('updateUsuario');
+
+
+    Route::delete('/deletarUsuario/{id}', [PerfilController::class, 'destroy'])
+    ->name('deletarUsuario');
 
 
 

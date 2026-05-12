@@ -17,7 +17,7 @@
 
             <div class="headerLogin">
                 <div>
-                    <h1>Buscar CEP</h1>
+                    <h1>Buscar por CEP</h1>
                     <p>Digite um CEP para preencher automaticamente os dados do endereço</p>
                 </div>
                 <div class="tiposDeInfos">

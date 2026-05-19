@@ -1,15 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\TarefasController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| Here is where you can register web routes for your application.
 |
 */
 
@@ -17,21 +17,48 @@ Route::get('/', function () {
     return view('usuario.login');
 })->name('login');
 
-use App\Http\Controllers\PerfilController;
 
-Route::post('/cadastro', [PerfilController::class, 'store'])->name('cadastro');
+/*
+|--------------------------------------------------------------------------
+| Cadastro em etapas
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/cadastro', function () {
     return view('usuario.cadastro');
 })->name('cadastroForm');
 
-use App\Http\Controllers\TarefasController;
 
-Route::get('/home', [TarefasController::class, 'index'])->name('home');
+Route::post('/cadastro/etapa1', [PerfilController::class, 'salvarEtapa1'])
+    ->name('cadastro.etapa1');
 
-Route::post('/NovaTarefa', [TarefasController::class, 'store'])->name('NovaTarefa');
 
-Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil');
+Route::view('/cep', 'cep')
+    ->name('cep');
+
+
+Route::post('/cadastro/finalizar', [PerfilController::class, 'finalizarCadastro'])
+    ->name('cadastro.finalizar');
+
+
+/*
+|--------------------------------------------------------------------------
+| API CEP
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/buscar-cep/{cep}', [PerfilController::class, 'buscarCep']);
+
+
+/*
+|--------------------------------------------------------------------------
+| Perfil
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/perfil', [PerfilController::class, 'index'])
+    ->name('perfil');
+
 
 Route::get('/editarUsuario', function () {
 
@@ -41,22 +68,29 @@ Route::get('/editarUsuario', function () {
 
 })->name('editarUsuario');
 
-Route::get('/NovaTarefa', function () {
-    return view('usuario.NovaTarefa');
-})->name('NovaTarefaHome');
-
-
-
-Route::get('/buscar-cep/{cep}', [PerfilController::class, 'buscarCep']);
-
-Route::view('/cep', 'cep')->name('cep');;
 
 Route::put('/editarUsuario/{id}', [PerfilController::class, 'update'])
     ->name('updateUsuario');
 
 
-    Route::delete('/deletarUsuario/{id}', [PerfilController::class, 'destroy'])
+Route::delete('/deletarUsuario/{id}', [PerfilController::class, 'destroy'])
     ->name('deletarUsuario');
 
 
+/*
+|--------------------------------------------------------------------------
+| Tarefas
+|--------------------------------------------------------------------------
+*/
 
+Route::get('/home', [TarefasController::class, 'index'])
+    ->name('home');
+
+
+Route::post('/NovaTarefa', [TarefasController::class, 'store'])
+    ->name('NovaTarefa');
+
+
+Route::get('/NovaTarefa', function () {
+    return view('usuario.NovaTarefa');
+})->name('NovaTarefaHome');

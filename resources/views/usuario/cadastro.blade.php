@@ -20,7 +20,7 @@
                 </div>
             </div>
 
-            <form style="display: flex; flex-direction: column; gap: 50px;" action="{{ route('cadastro') }}" method="POST">
+            <form style="display: flex; flex-direction: column; gap: 50px;" action="{{ route('cadastro.etapa1') }}" method="POST">
                 @csrf
 
                 <div class="infosUsuario">
@@ -49,7 +49,7 @@
 
                 <div style="display: flex; flex-direction: column; gap: 10px;">
                     
-                    <button type="submit" class="enviar-btn">Cadastrar</button>
+                    <button type="submit" class="enviar-btn">Continuar</button>
 
                     <a href="{{ route('login') }}" class="cadastro-btn">
                         Ja tem uma conta? faça o login

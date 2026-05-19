@@ -11,5 +11,5 @@ class PerfilUsuario extends Model
 
     protected $table ='tb_usuario';
 
-public $fillable = ['nomeUsuario', 'emailUsuario', 'senhaUsuario', 'datanascUsuario'];
+public $fillable = ['nomeUsuario', 'emailUsuario', 'senhaUsuario', 'datanascUsuario', 'cepUsuario', 'logradouroUsuario', 'numlogradouroUsuario', 'complementoUsuario', 'bairroUsuario', 'cidadeUsuario', 'estadoUsuario'];
 }

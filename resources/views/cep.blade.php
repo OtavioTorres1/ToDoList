@@ -17,63 +17,79 @@
 
             <div class="headerLogin">
                 <div>
-                    <h1>Buscar por CEP</h1>
-                    <p>Digite um CEP para preencher automaticamente os dados do endereço</p>
+                    <h1>Dados residenciais</h1>
+                    <p>Digite seu CEP para preencher automaticamente os dados do endereço</p>
                 </div>
+
                 <div class="tiposDeInfos">
                     <a href="{{ route('perfil') }}" class="editar-btn">
                         <p style="color: black">informações básicas</p>
                     </a>
+
                     <a href="{{ route('cep') }}" class="editar-btn">
-                       <p style="color: #110c81"> informações de residencia </p>
+                        <p style="color: #110c81">informações de residência</p>
                     </a>
                 </div>
             </div>
 
-            <div class="infosUsuario">
+            <form action="{{ route('cadastro.finalizar') }}" method="POST">
 
-                <div>
-                    <label>CEP</label>
-                    <input type="text" id="cep" placeholder="Digite o CEP">
+                @csrf
+
+                <div class="infosUsuario">
+
+                    <div>
+                        <label>CEP</label>
+                        <input type="text" id="cep" name="cepUsuario" required>
+                    </div>
+
+                    <div>
+                        <button type="button" id="buscarBtn" class="editar-btn">
+                            Buscar CEP
+                        </button>
+                    </div>
+
+                    <div>
+                        <label>Logradouro</label>
+                        <input type="text" id="logradouro" name="logradouroUsuario" required>
+                    </div>
+
+                    <div>
+                        <label>Número</label>
+                        <input type="text" id="numero" name="numlogradouroUsuario" required>
+                    </div>
+
+                    <div>
+                        <label>Complemento</label>
+                        <input type="text" id="complemento" name="complementoUsuario">
+                    </div>
+
+                    <div>
+                        <label>Bairro</label>
+                        <input type="text" id="bairro" name="bairroUsuario" required>
+                    </div>
+
+                    <div>
+                        <label>Cidade</label>
+                        <input type="text" id="cidade" name="cidadeUsuario" required>
+                    </div>
+
+                    <div>
+                        <label>Estado</label>
+                        <input type="text" id="estado" name="estadoUsuario" required>
+                    </div>
+
                 </div>
 
-                <div>
-                    <label>Logradouro</label>
-                    <input type="text" id="logradouro" placeholder="Logradouro">
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+
+                    <button type="submit" class="enviar-btn">
+                        Cadastrar
+                    </button>
+
                 </div>
 
-                <div>
-                    <label>Número</label>
-                    <input type="text" id="numero" placeholder="Número">
-                </div>
-
-                <div>
-                    <label>Complemento</label>
-                    <input type="text" id="complemento" placeholder="Complemento">
-                </div>
-
-                <div>
-                    <label>Bairro</label>
-                    <input type="text" id="bairro" placeholder="Bairro">
-                </div>
-
-                <div>
-                    <label>Cidade</label>
-                    <input type="text" id="cidade" placeholder="Cidade">
-                </div>
-
-                <div>
-                    <label>Estado</label>
-                    <input type="text" id="estado" placeholder="Estado">
-                </div>
-
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-                <button class="enviar-btn" id="buscarBtn">
-                    Buscar CEP
-                </button>
-            </div>
+            </form>
 
         </div>
 

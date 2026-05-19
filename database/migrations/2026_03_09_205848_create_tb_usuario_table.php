@@ -17,6 +17,13 @@ return new class extends Migration
             $table->string('emailUsuario');
             $table->string('senhaUsuario');
             $table->date('datanascUsuario');
+            $table->string('cepUsuario');
+            $table->string('logradouroUsuario');
+            $table->string('numlogradouroUsuario');
+            $table->string('complementoUsuario');
+            $table->string('bairroUsuario');
+            $table->string('cidadeUsuario');
+            $table->string('estadoUsuario');
             $table->timestamps();
         });
     }

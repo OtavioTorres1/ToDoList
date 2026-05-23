@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PerfilUsuario;
+use App\Models\Tarefas;
 use Illuminate\Support\Facades\Http;
 
 class PerfilController extends Controller
@@ -14,6 +15,15 @@ class PerfilController extends Controller
 
         return view('usuario.perfil', compact('usuario'));
     }
+
+    public function home()
+{
+    $usuario = PerfilUsuario::latest('id')->first();
+            $tarefas = Tarefas::all();
+            $totalTarefas = Tarefas::count();
+
+            return view('home', compact('tarefas', 'totalTarefas'));
+}
 
     public function buscarCep($cep)
     {

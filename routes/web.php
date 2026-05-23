@@ -94,3 +94,5 @@ Route::post('/NovaTarefa', [TarefasController::class, 'store'])
 Route::get('/NovaTarefa', function () {
     return view('usuario.NovaTarefa');
 })->name('NovaTarefaHome');
+
+Route::get('/home', [PerfilController::class, 'home'])->name('home');

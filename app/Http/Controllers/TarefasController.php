@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Tarefas;
+use App\Models\PerfilUsuario;
+
 
 class TarefasController extends Controller
 {
@@ -15,8 +17,10 @@ class TarefasController extends Controller
     {
         //
         $tarefas = Tarefas::all();
+        $totalTarefas = Tarefas::count();
 
-       return view('home')->with('tarefas', $tarefas);
+
+       return view('home')->with('tarefas', $tarefas, $totalTarefas);
     }
 
     /**

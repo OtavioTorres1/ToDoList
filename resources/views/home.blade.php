@@ -6,55 +6,144 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="{{url('css/home.css')}}">
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const menuBtn = document.getElementById("menuBtn");
+    const sidebar = document.getElementById("sidebar");
+
+    menuBtn.addEventListener("click", function(){
+        sidebar.classList.toggle("fechado");
+    });
+
+});
+
+</script>
+
 </head>
 <body>
 
     @include('layouts.header')
 
     <main>
-        <table>
-    <tr>
-        <th>Tarefa</th>
-        <th>descrição</th>
-        <th>Status</th>
-        <th>Prioridade</th>
-        <th>Prazo</th>
-    </tr>
-    @foreach($tarefas as $t)
-    <tr>
-        <td>{{ $t->tituloTarefa}}</td>
-        <td>{{$t->descTarefa}}</td>
-        <td>
-        @if($t->statusTarefa == 'Concluido')
-        <span style="color:green;">Concluído</span>
 
-        @elseif($t->statusTarefa == 'Em andamento')
-        <span style="color:orange;">Em andamento</span>
+    <div class="layout-home">
 
-        @else
-        <span style="color:red;">Pendente</span>
-        @endif
-        </td>
-        <td>
-             @if($t->prioridadeTarefa == 'Alta')
-        <span style="color:red;">Alta</span>
+    <!-- MENU LATERAL -->
+    <aside class="sidebar"  id="sidebar">
 
-        @elseif($t->prioridadeTarefa == 'Media')
-        <span style="color:orange;">Média</span>
+        <h3>Filtros:</h3>
 
-        @else
-        <span style="color:green;">Baixa</span>
-        @endif
+        <ul>
+            <li class="ativo">Hoje</li>
+            <li>Importantes</li>
+            <li>Concluídas</li>
+        </ul>
 
-        </td>
-        <td>{{$t->prazoTarefa}}</td>
-    </tr>
+        <hr>
 
-    @if($tarefas->isEmpty())
-    <p style="font-size: 13px; text-align: center;">Nenhuma tarefa cadastrada.</p>
-    @endif
-    @endforeach
-</table>
+        <h3>Grupo de tarefas:</h3>
+
+        <ul>
+            <li>Faculdade</li>
+            <li>Trabalho</li>
+            <li>Pessoal</li>
+        </ul>
+
+        <hr>
+
+        <h3>Usuario:</h3>
+
+        <ul>
+            <a href="{{ route('perfil') }}"><li>Perfil</li></a>
+        </ul>
+
+    </aside>
+
+        <section class="tarefas">
+
+            <h1>Olá, {{$usuario->nomeUsuario ?? 'Usuário'}}!</h1>
+        
+            <p style="opacity:0.5">Você tem {{$totalTarefas}} tarefas em andamento.</p>
+
+
+            <br><br><br>
+
+            <h2>Tarefas de Hoje:</h2>
+            <br>
+                @foreach($tarefas as $t)
+
+                <!-- Se tiver concluída: -->
+                 @if($t->statusTarefa == 'concluida')
+                    <div class="cards-tarefas" style="background-color: rgba(255, 255, 255, 0.2);">
+                        <s>{{ $t->tituloTarefa}}</s>
+
+                        <s style="opacity: 0.5">até {{$t->prazoTarefa}}</s>
+
+                            <p>
+                                @if($t->statusTarefa == 'concluida')
+                                <span style="background-color: #90EE90; color: #228B22; white; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Concluído</span>
+
+                                @elseif($t->statusTarefa == 'Em andamento')
+                                <span style="background-color: #1E90FF; color: white; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;"">Em andamento</span>
+
+                                @else
+                                <span style="background-color: #d4d4d4; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Pendente</span>
+                                @endif
+                            </p>
+
+                                <a href="{{ route('home') }}">
+                                    <img src="{{url('images/lixo.png')}}" alt="" style="opacity: 0.5;">
+                                </a>
+                            
+                                <a href="{{ route('home') }}">
+                                    <img src="{{url('images/editar.png')}}" alt="" style="opacity: 0.5;">
+                                </a>
+
+                        </div>
+
+                    <!-- Se não estiver concluída: -->
+                    @else
+                    <div class="cards-tarefas">
+                        <p >{{ $t->tituloTarefa}}</p>
+
+                        <p style="opacity: 0.5">até {{$t->prazoTarefa}}</p>
+
+                            <p>
+                                @if($t->statusTarefa == 'concluida')
+                                <span style="background-color: #90EE90; color: #228B22; white; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Concluído</span>
+
+                                @elseif($t->statusTarefa == 'Em andamento')
+                                <span style="background-color: #1E90FF; color: white; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;"">Em andamento</span>
+
+                                @else
+                                <span style="background-color: #d4d4d4; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Pendente</span>
+                                @endif
+                            </p>
+
+                                <a href="{{ route('home') }}">
+                                    <img src="{{url('images/lixo.png')}}" alt="">
+                                </a>
+                            
+                                <a href="{{ route('home') }}">
+                                    <img src="{{url('images/editar.png')}}" alt="">
+                                </a>
+
+                        </div>
+                        @endif
+                @if($tarefas->isEmpty())
+                <p style="font-size: 13px; text-align: center;">Nenhuma tarefa cadastrada.</p>
+                @endif
+                @endforeach
+          
+        </section>
+        <a href="{{ route('NovaTarefaHome') }}" class="btn-add">
+            +
+        </a>
+</div>  
+        
     </main>
 
        @include('layouts.footer')

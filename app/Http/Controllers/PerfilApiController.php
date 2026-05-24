@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PerfilUsuario;
-use Illuminate\Support\Facades\Http;
 
 class PerfilApiController extends Controller
 {

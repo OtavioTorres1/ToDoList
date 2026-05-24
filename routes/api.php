@@ -3,17 +3,53 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\TarefasApiController;
+use App\Http\Controllers\PerfilApiController;
+
 /*
 |--------------------------------------------------------------------------
-| API Routes
+| TAREFAS
 |--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/tarefas',
+[TarefasApiController::class, 'index']);
+
+Route::post('/tarefas',
+[TarefasApiController::class, 'store']);
+
+Route::put('/tarefas/{id}',
+[TarefasApiController::class, 'update']);
+
+Route::delete('/tarefas/{id}',
+[TarefasApiController::class, 'destroy']);
+
+/*
+|--------------------------------------------------------------------------
+| USUÁRIOS
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/usuarios',
+[PerfilApiController::class, 'index']);
+
+Route::get('/usuarios/{id}',
+[PerfilApiController::class, 'show']);
+
+Route::post('/usuarios',
+[PerfilApiController::class, 'store']);
+
+Route::put('/usuarios/{id}',
+[PerfilApiController::class, 'update']);
+
+Route::delete('/usuarios/{id}',
+[PerfilApiController::class, 'destroy']);
+
+/*
+|--------------------------------------------------------------------------
+| CEP
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/buscar-cep/{cep}',
+[PerfilApiController::class, 'buscarCep']);

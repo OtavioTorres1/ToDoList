@@ -23,6 +23,13 @@ class TarefasController extends Controller
             return view('home', compact('tarefas', 'totalTarefas', 'usuario'));
     }
 
+    public function apiIndex()
+{
+    $tarefas = Tarefas::all();
+
+    return response()->json($tarefas);
+}
+
         public function hoje()
 {
     $usuario = PerfilUsuario::latest('id')->first();
@@ -58,6 +65,23 @@ class TarefasController extends Controller
     
     return redirect()->route('home');
     }
+
+    public function apiStore(Request $request)
+{
+    $tarefa = Tarefas::create([
+        'tituloTarefa' => $request->tituloTarefa,
+        'descTarefa' => $request->descTarefa,
+        'statusTarefa' => $request->statusTarefa,
+        'prioridadeTarefa' => $request->prioridadeTarefa,
+        'prazoTarefa' => $request->prazoTarefa,
+        'tb_usuario_id' => $request->tb_usuario_id
+    ]);
+
+    return response()->json([
+        'mensagem' => 'Tarefa criada com sucesso',
+        'tarefa' => $tarefa
+    ]);
+}
 
     /**
      * Display the specified resource.
@@ -95,6 +119,24 @@ class TarefasController extends Controller
         return redirect()->route('home');
     }
 
+    public function apiUpdate(Request $request, $id)
+{
+    $tarefa = Tarefas::findOrFail($id);
+
+    $tarefa->update([
+        'tituloTarefa' => $request->tituloTarefa,
+        'descTarefa' => $request->descTarefa,
+        'statusTarefa' => $request->statusTarefa,
+        'prioridadeTarefa' => $request->prioridadeTarefa,
+        'prazoTarefa' => $request->prazoTarefa
+    ]);
+
+    return response()->json([
+        'mensagem' => 'Tarefa atualizada',
+        'tarefa' => $tarefa
+    ]);
+}
+
     /**
      * Remove the specified resource from storage.
      */
@@ -106,4 +148,15 @@ class TarefasController extends Controller
 
         return redirect()->route('home');
     }
+
+    public function apiDestroy($id)
+{
+    $tarefa = Tarefas::findOrFail($id);
+
+    $tarefa->delete();
+
+    return response()->json([
+        'mensagem' => 'Tarefa deletada'
+    ]);
+}
 }

@@ -42,8 +42,8 @@
                         <select name="statusTarefa" required>
                             <option value="">Selecione</option>
                             <option value="pendente">Pendente</option>
-                            <option value="em andamento">Em andamento</option>
-                            <option value="concluida">Concluída</option>
+                            <option value="Em andamento">Em andamento</option>
+                            <option value="Concluido">Concluido</option>
                         </select>
                     </div>
 

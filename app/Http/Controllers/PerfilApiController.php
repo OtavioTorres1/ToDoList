@@ -16,7 +16,7 @@ class PerfilApiController extends Controller
 
     public function index()
     {
-        $usuarios = PerfilUsuario::all();
+        $usuarios = PerfilUsuario::latest('id')->first();
 
         return response()->json($usuarios);
     }

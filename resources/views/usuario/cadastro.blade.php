@@ -25,24 +25,28 @@
 
                 <div class="infosUsuario">
                     
-                    <div>
-                        <label>Nome</label>
-                        <input type="text" placeholder="Nome:" name="nomeUsuario" required>
+                    <div style="display: flex; flex-direction: row; gap: 5px">
+                        <div>
+                            <label>Nome</label>
+                            <input type="text" placeholder="Nome:" name="nomeUsuario" required>
+                        </div>
+
+                        <div>
+                            <label>Email</label>
+                            <input type="email" placeholder="Email:" name="emailUsuario" required>
+                        </div>
                     </div>
 
-                    <div>
-                        <label>Email</label>
-                        <input type="email" placeholder="Email:" name="emailUsuario" required>
-                    </div>
+                    <div style="display: flex; flex-direction: row; gap: 5px">
+                        <div>
+                            <label>Senha</label>
+                            <input type="password" placeholder="Senha:" name="senhaUsuario" required>
+                        </div>
 
-                    <div>
-                        <label>Senha</label>
-                        <input type="password" placeholder="Senha:" name="senhaUsuario" required>
-                    </div>
-
-                    <div>
-                        <label>Data de Nascimento</label>
-                        <input type="date" name="datanascUsuario" required>
+                        <div>
+                            <label>Data de Nascimento</label>
+                            <input type="date" name="datanascUsuario" required>
+                        </div>
                     </div>
 
                 </div>

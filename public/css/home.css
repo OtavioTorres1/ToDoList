@@ -4,7 +4,7 @@
     cursor: pointer;
     padding: 10px 20px;
     user-select: none;
-    color: black;
+    color: #3B78E7;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -26,8 +26,16 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* GRID DAS TAREFAS */
+
+.lista-tarefas{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
 .cards-tarefas{
-    width: 800px;
+    width: 100%;
     background-color: #ffffff;
     border-radius: 16px;
     padding: 20px;
@@ -137,7 +145,7 @@
     right: 30px;
     width: 70px;
     height: 70px;
-    background-color: #2d74ff;
+    background: linear-gradient(135deg, #F97316, #EA580C);
     color: white;
     border-radius: 50%;
     text-decoration: none;

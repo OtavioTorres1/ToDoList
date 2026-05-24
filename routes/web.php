@@ -28,6 +28,10 @@ Route::get('/cadastro', function () {
     return view('usuario.cadastro');
 })->name('cadastroForm');
 
+Route::get('/editarTarefa', function () {
+    return view('tarefas.editarTarefa');
+})->name('editarTarefa');
+
 
 Route::post('/cadastro/etapa1', [PerfilController::class, 'salvarEtapa1'])
     ->name('cadastro.etapa1');
@@ -95,4 +99,16 @@ Route::get('/NovaTarefa', function () {
     return view('usuario.NovaTarefa');
 })->name('NovaTarefaHome');
 
-Route::get('/home', [PerfilController::class, 'home'])->name('home');
+
+Route::get('/residencia', [PerfilController::class, 'residencia'])->name('residencia');
+
+Route::delete('/deletarTarefa/{id}', [TarefasController::class, 'destroy'])
+    ->name('deletarTarefa');
+
+    Route::get('/editarTarefa/{id}',
+[TarefasController::class, 'edit'])
+->name('editarTarefa');
+
+Route::put('/updateTarefa/{id}',
+[TarefasController::class, 'update'])
+->name('updateTarefa');

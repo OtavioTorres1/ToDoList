@@ -30,11 +30,11 @@
 
         <!-- ABAS -->
         <div class="abas">
-            <a href="{{ route('perfil') }}" class="ativa">
+            <a href="{{ route('perfil') }}">
                 informações básicas
             </a>
 
-            <a href="{{ route('residencia') }}">
+            <a href="{{ route('residencia') }}" class="ativa">
                 informações de residencia
             </a>
         </div>
@@ -43,18 +43,23 @@
         <div class="infos-grid">
 
             <div class="campo">
-                <label>Nome:</label>
-                <p>{{ $usuario->nomeUsuario }}</p>
+                <label>Rua:</label>
+                <p>{{ $usuario->logradouroUsuario }}</p>
             </div>
 
             <div class="campo">
-                <label>Nascimento:</label>
-                <p>{{ $usuario->datanascUsuario }}</p>
+                <label>Número:</label>
+                <p>{{ $usuario->numlogradouroUsuario }}</p>
             </div>
 
             <div class="campo">
-                <label>Email:</label>
-                <p>{{ $usuario->emailUsuario }}</p>
+                <label>Bairro:</label>
+                <p>{{ $usuario->bairroUsuario}}</p>
+            </div>
+
+            <div class="campo">
+                <label>Cidade:</label>
+                <p>{{ $usuario->cidadeUsuario}} ({{ $usuario->estadoUsuario}})</p>
             </div>
 
         </div>

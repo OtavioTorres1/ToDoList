@@ -20,16 +20,6 @@
                     <h1>Dados residenciais</h1>
                     <p>Digite seu CEP para preencher automaticamente os dados do endereço</p>
                 </div>
-
-                <div class="tiposDeInfos">
-                    <a href="{{ route('perfil') }}" class="editar-btn">
-                        <p style="color: black">informações básicas</p>
-                    </a>
-
-                    <a href="{{ route('cep') }}" class="editar-btn">
-                        <p style="color: #110c81">informações de residência</p>
-                    </a>
-                </div>
             </div>
 
             <form action="{{ route('cadastro.finalizar') }}" method="POST">
@@ -44,39 +34,45 @@
                     </div>
 
                     <div>
-                        <button type="button" id="buscarBtn" class="editar-btn">
+                        <button type="button" id="buscarBtn" class="btn-cep">
                             Buscar CEP
                         </button>
                     </div>
 
-                    <div>
-                        <label>Logradouro</label>
-                        <input type="text" id="logradouro" name="logradouroUsuario" required>
+                    <div style="display: flex; flex-direction: row; gap: 5px">
+                        <div>
+                            <label>Rua</label>
+                            <input type="text" id="logradouro" name="logradouroUsuario" required>
+                        </div>
+
+                        <div>
+                            <label>Número</label>
+                            <input type="text" id="numero" name="numlogradouroUsuario" required>
+                        </div>
                     </div>
 
-                    <div>
-                        <label>Número</label>
-                        <input type="text" id="numero" name="numlogradouroUsuario" required>
+                    <div style="display: flex; flex-direction: row; gap: 5px">
+                        <div>
+                            <label>Complemento</label>
+                            <input type="text" id="complemento" name="complementoUsuario">
+                        </div>
+
+                        <div>
+                            <label>Bairro</label>
+                            <input type="text" id="bairro" name="bairroUsuario" required>
+                        </div>
                     </div>
 
-                    <div>
-                        <label>Complemento</label>
-                        <input type="text" id="complemento" name="complementoUsuario">
-                    </div>
+                    <div style="display: flex; flex-direction: row; gap: 5px">
+                        <div>
+                            <label>Cidade</label>
+                            <input type="text" id="cidade" name="cidadeUsuario" required>
+                        </div>
 
-                    <div>
-                        <label>Bairro</label>
-                        <input type="text" id="bairro" name="bairroUsuario" required>
-                    </div>
-
-                    <div>
-                        <label>Cidade</label>
-                        <input type="text" id="cidade" name="cidadeUsuario" required>
-                    </div>
-
-                    <div>
-                        <label>Estado</label>
-                        <input type="text" id="estado" name="estadoUsuario" required>
+                        <div>
+                            <label>Estado</label>
+                            <input type="text" id="estado" name="estadoUsuario" required>
+                        </div>
                     </div>
 
                 </div>

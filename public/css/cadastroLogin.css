@@ -27,13 +27,15 @@ main{
 .fundo{
     background-color: #ffffff;
     width: 100%;
-    max-width: 500px; /* Reduzi levemente para ficar mais elegante em desktops */
+    max-width: 600px; /* Reduzi levemente para ficar mais elegante em desktops */
     border-radius: 24px;
     overflow: hidden;
     /* Sombra mais sutil e profissional */
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); 
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 35px;
     padding-bottom: 40px;
     animation: aparecer 0.6s ease;
@@ -180,6 +182,107 @@ main{
     filter: brightness(1.1);
 }
 
+/* ===== ESTILO DO SELECT ===== */
+select {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    color: #1E293B; /* Grafite escuro para o texto */
+    background-color: #F8FAFC; /* Fundo suave dos seus inputs */
+    border: 2px solid #E2E8F0; /* Borda padrão do seu projeto */
+    border-radius: 12px; /* Arredondamento consistente */
+    outline: none;
+    transition: 0.3s;
+    cursor: pointer;
+
+    /* Remove a setinha padrão do navegador */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    /* Adiciona uma nova setinha personalizada usando imagem (SVG) */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%233B78E7'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 18px center;
+    background-size: 18px;
+}
+
+/* Efeito ao focar (Focus) - Igual aos seus inputs */
+select:focus {
+    border-color: #3B78E7; /* Azul da sua logo */
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(59, 120, 231, 0.1);
+    transform: scale(1.01);
+}
+
+/* Estilização das opções (limitada pelo navegador) */
+select option {
+    background-color: white;
+    color: #1E293B;
+    padding: 10px;
+}
+
+/* ===== ESTILO DO INPUT DE DATA ===== */
+input[type="date"] {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    color: #1E293B; /* Grafite escuro */
+    background-color: #F8FAFC;
+    border: 2px solid #E2E8F0;
+    border-radius: 12px;
+    outline: none;
+    transition: 0.3s;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Foca no azul oficial da logo */
+input[type="date"]:focus {
+    border-color: #3B78E7;
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(59, 120, 231, 0.1);
+}
+
+/* ===== ESTILIZANDO OS TEXTOS INTERNOS (dd/mm/aaaa) ===== */
+input[type="date"]::-webkit-datetime-edit {
+    padding: 0;
+}
+
+input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+    background: transparent;
+}
+
+/* Cor dos números e barras (dd / mm / aaaa) */
+input[type="date"]::-webkit-datetime-edit-text {
+    color: #94A3B8; /* Cinza claro para as barras / */
+    padding: 0 4px;
+}
+
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+    color: #1E293B; /* Cor dos números */
+    text-transform: uppercase;
+}
+
+/* ===== ESTILIZANDO O ÍCONE DE CALENDÁRIO ===== */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%233B78E7'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'%3E%3C/path%3E%3C/svg%3E");
+    background-position: center;
+    background-size: 20px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
 /* ===== CADASTRO ===== */
 .cadastro-btn{
     color: #64748B;
@@ -195,6 +298,44 @@ main{
 
 .cadastro-btn:hover{
     opacity: 0.8;
+}
+
+/* ===== ESTILO DO BOTÃO BUSCAR CEP ===== */
+.btn-cep {
+    width: 100%;
+    padding: 14px 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    
+    /* Gradiente Laranja oficial da sua marca */
+    background: linear-gradient(135deg, #F97316, #EA580C);
+    
+    border: none;
+    border-radius: 12px; /* Consistente com seus inputs */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    
+    /* Sombra suave para dar profundidade */
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+}
+
+/* Efeito ao passar o mouse */
+.btn-cep:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(249, 115, 22, 0.35);
+    filter: brightness(1.1);
+}
+
+/* Efeito ao clicar */
+.btn-cep:active {
+    transform: translateY(0);
 }
 
 /* ===== ANIMAÇÃO ===== */
@@ -225,3 +366,76 @@ main{
         width: 100%;
     }
 }
+
+/* LINHAS DO FORM */
+
+.linha-form{
+    display: flex;
+    gap: 30px;
+    width: 100%;
+}
+
+/* CAMPOS */
+
+.campo{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* AÇÕES */
+
+.acoes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* RESPONSIVO */
+
+@media(max-width: 700px){
+
+    .linha-form{
+        flex-direction: column;
+    }
+
+}
+
+/* LINHAS DO FORM */
+
+.linha-form{
+    display: flex;
+    gap: 30px;
+    width: 100%;
+}
+
+/* CAMPOS */
+
+.campo{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* AÇÕES */
+
+.acoes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* RESPONSIVO */
+
+@media(max-width: 700px){
+
+    .linha-form{
+        flex-direction: column;
+    }
+
+}
+

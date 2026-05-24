@@ -16,13 +16,30 @@ class PerfilController extends Controller
         return view('usuario.perfil', compact('usuario'));
     }
 
+        public function residencia()
+{
+    $usuario = PerfilUsuario::latest('id')->first();
+
+            return view('usuario.residencia', compact('usuario'));
+}
+
     public function home()
 {
     $usuario = PerfilUsuario::latest('id')->first();
             $tarefas = Tarefas::all();
-            $totalTarefas = Tarefas::count();
+            $totalTarefas = Tarefas::where('statusTarefa', 'Em andamento')->count();
 
-            return view('home', compact('tarefas', 'totalTarefas'));
+            return view('home', compact('tarefas', 'totalTarefas', 'usuario'));
+}
+
+    public function hoje()
+{
+    $usuario = PerfilUsuario::latest('id')->first();
+            $tarefas = Tarefas::all();
+            $totalTarefasC = Tarefas::where('statusTarefa', 'concluida')->count();
+            $hojeTarefas = Tarefas::where('prazoTarefa', '2026-05-24');
+
+            return view('hoje.tarefas', compact('tarefas', 'totalTarefasC', 'hojeTarefas'));
 }
 
     public function buscarCep($cep)

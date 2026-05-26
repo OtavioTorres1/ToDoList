@@ -35,7 +35,7 @@
             </div>
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <a href="{{ route('home') }}" class="enviar-btn">Entrar</a>
-                <a href="{{ route('cadastroForm') }}" class="cadastro-btn">Ainda não tem uma conta? faça seu cadastro</a>
+                <a href="{{ route('cadastro') }}" class="cadastro-btn">Ainda não tem uma conta? faça seu cadastro</a>
             </div>
         </div>
 

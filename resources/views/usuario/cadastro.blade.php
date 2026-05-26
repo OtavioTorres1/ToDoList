@@ -20,7 +20,7 @@
                 </div>
             </div>
 
-            <form style="display: flex; flex-direction: column; gap: 50px;" action="{{ route('cadastro.etapa1') }}" method="POST">
+            <form style="display: flex; flex-direction: column; gap: 50px;" action="{{ route('cadastro') }}" method="POST">
                 @csrf
 
                 <div class="infosUsuario">
@@ -49,11 +49,53 @@
                         </div>
                     </div>
 
+
+                        <div>
+                            <label>Cep</label>
+                            <input type="text" id="cep" name="cepUsuario" required>
+                        </div>
+                    
+                    <div style="display: flex; flex-direction: row; gap: 5px">
+                        <div>
+                            <label>Rua</label>
+                            <input type="text" id="logradouro" name="logradouroUsuario" required>
+                        </div>
+
+                        <div>
+                            <label>Número</label>
+                            <input type="text" id="numero" name="numlogradouroUsuario" required>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: row; gap: 5px">
+                        <div>
+                            <label>Complemento</label>
+                            <input type="text" id="complemento" name="complementoUsuario">
+                        </div>
+
+                        <div>
+                            <label>Bairro</label>
+                            <input type="text" id="bairro" name="bairroUsuario" required>
+                        </div>
+                    </div>
+
+                                        <div style="display: flex; flex-direction: row; gap: 5px">
+                        <div>
+                            <label>Cidade</label>
+                            <input type="text" id="cidade" name="cidadeUsuario" required>
+                        </div>
+
+                        <div>
+                            <label>Estado</label>
+                            <input type="text" id="estado" name="estadoUsuario" required>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div style="display: flex; flex-direction: column; gap: 10px;">
                     
-                    <button type="submit" class="enviar-btn">Continuar</button>
+                    <button type="submit" class="enviar-btn">Cadastrar</button>
 
                     <a href="{{ route('login') }}" class="cadastro-btn">
                         Ja tem uma conta? faça o login

@@ -13,6 +13,8 @@ class TarefasController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    //pegar dados da tarefa e usuario para a home:
     public function index()
     {
         //
@@ -22,23 +24,6 @@ class TarefasController extends Controller
 
             return view('home', compact('tarefas', 'totalTarefas', 'usuario'));
     }
-
-    public function apiIndex()
-{
-    $tarefas = Tarefas::all();
-
-    return response()->json($tarefas);
-}
-
-        public function hoje()
-{
-    $usuario = PerfilUsuario::latest('id')->first();
-            $tarefas = Tarefas::all();
-            $totalTarefasC = Tarefas::where('statusTarefa', 'concluida')->count();
-            $hojeTarefas = Tarefas::where('prazoTarefa', '2026-05-24');
-
-            return view('hoje.tarefas', compact('tarefas', 'totalTarefasC', 'hojeTarefas', 'residencia'));
-}
 
     /**
      * Show the form for creating a new resource.
@@ -51,6 +36,8 @@ class TarefasController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    //cadastrar tarefa
     public function store(Request $request)
     {
         //
@@ -66,22 +53,7 @@ class TarefasController extends Controller
     return redirect()->route('home');
     }
 
-    public function apiStore(Request $request)
-{
-    $tarefa = Tarefas::create([
-        'tituloTarefa' => $request->tituloTarefa,
-        'descTarefa' => $request->descTarefa,
-        'statusTarefa' => $request->statusTarefa,
-        'prioridadeTarefa' => $request->prioridadeTarefa,
-        'prazoTarefa' => $request->prazoTarefa,
-        'tb_usuario_id' => $request->tb_usuario_id
-    ]);
 
-    return response()->json([
-        'mensagem' => 'Tarefa criada com sucesso',
-        'tarefa' => $tarefa
-    ]);
-}
 
     /**
      * Display the specified resource.
@@ -96,9 +68,7 @@ class TarefasController extends Controller
      */
     public function edit($id)
     {
-        $tarefa = Tarefas::findOrFail($id);
 
-        return view('tarefas.editarTarefa', compact('tarefa'));
     }
 
     /**
@@ -106,57 +76,16 @@ class TarefasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tarefa = Tarefas::findOrFail($id);
 
-        $tarefa->tituloTarefa = $request->tituloTarefa;
-        $tarefa->descTarefa = $request->descTarefa;
-        $tarefa->statusTarefa = $request->statusTarefa;
-        $tarefa->prioridadeTarefa = $request->prioridadeTarefa;
-        $tarefa->prazoTarefa = $request->prazoTarefa;
-
-        $tarefa->save();
-
-        return redirect()->route('home');
     }
 
-    public function apiUpdate(Request $request, $id)
-{
-    $tarefa = Tarefas::findOrFail($id);
-
-    $tarefa->update([
-        'tituloTarefa' => $request->tituloTarefa,
-        'descTarefa' => $request->descTarefa,
-        'statusTarefa' => $request->statusTarefa,
-        'prioridadeTarefa' => $request->prioridadeTarefa,
-        'prazoTarefa' => $request->prazoTarefa
-    ]);
-
-    return response()->json([
-        'mensagem' => 'Tarefa atualizada',
-        'tarefa' => $tarefa
-    ]);
-}
 
     /**
      * Remove the specified resource from storage.
      */
      public function destroy($id)
     {
-        $tarefas = Tarefas::findOrFail($id);
 
-        $tarefas->delete();
-
-        return redirect()->route('home');
     }
 
-    public function apiDestroy($id)
-{
-    $tarefa = Tarefas::findOrFail($id);
-
-    $tarefa->delete();
-
-    return response()->json([
-        'mensagem' => 'Tarefa deletada'
-    ]);
-}
 }

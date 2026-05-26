@@ -62,23 +62,24 @@
         <!-- BOTÕES -->
         <div class="acoes">
 
-            <a href="{{ route('editarUsuario') }}" class="btn-editar">
+            <a class="btn-editar">
                 Editar Perfil
             </a>
 
-            <form action="{{ route('deletarUsuario', $usuario->id) }}"
-                method="POST"
-                onsubmit="return confirm('Tem certeza?')">
+            <a class="btn-sair">
+                Excluir conta
+            </a>
 
-                @csrf
-                @method('DELETE')
+            
 
-                <button type="submit" class="btn-sair">
-                    Excluir conta
-                </button>
+        </div>
 
-            </form>
+        <br>
 
+        <div class="acoes">
+            <a href="{{ route('home') }}" class="btn-voltar">
+                Voltar
+            </a>
         </div>
 
     </div>

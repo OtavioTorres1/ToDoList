@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function(){
         <h3>Filtros:</h3>
 
         <ul>
-            <li class="ativo" href="{{ route('home') }}">Todas</li>
+            <li class="ativo">Todas</li>
             <li>Hoje</li>
             <li>Importantes</li>
             <li>Concluídas</li>
@@ -100,20 +100,14 @@ document.addEventListener("DOMContentLoaded", function(){
                                 @endif
                             </p>
 
-                                <form action="{{ route('deletarTarefa', $t->id) }}" method="POST"  onsubmit="return confirm('Tem certeza que deseja excluir essa tarefa?')">
-
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button type="submit" style="border:none; background:none; cursor:pointer;">
-                                        <img src="{{url('images/lixo.png')}}" alt="">
-                                    </button>
-
-                                </form>
+                                <a>
+                                    <img src="{{ url('images/lixo.png') }}" alt="">
+                                </a>
                             
-                                <a href="{{ route('editarTarefa', $t->id) }}">
+                                <a>
                                     <img src="{{ url('images/editar.png') }}" alt="">
                                 </a>
+
 
                         </div>
 
@@ -136,18 +130,11 @@ document.addEventListener("DOMContentLoaded", function(){
                                 @endif
                             </p>
 
-                                <form action="{{ route('deletarTarefa', $t->id) }}" method="POST"  onsubmit="return confirm('Tem certeza que deseja excluir essa tarefa?')">
-
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button type="submit" style="border:none; background:none; cursor:pointer;">
-                                        <img src="{{url('images/lixo.png')}}" alt="">
-                                    </button>
-
-                                </form>
+                                <a>
+                                    <img src="{{ url('images/lixo.png') }}" alt="">
+                                </a>
                             
-                                <a href="{{ route('editarTarefa', $t->id) }}">
+                                <a>
                                     <img src="{{ url('images/editar.png') }}" alt="">
                                 </a>
 

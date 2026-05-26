@@ -79,7 +79,7 @@
                         </div>
                     </div>
 
-                                        <div style="display: flex; flex-direction: row; gap: 5px">
+                    <div style="display: flex; flex-direction: row; gap: 5px">
                         <div>
                             <label>Cidade</label>
                             <input type="text" id="cidade" name="cidadeUsuario" required>

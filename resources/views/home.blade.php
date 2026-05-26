@@ -67,9 +67,11 @@ document.addEventListener("DOMContentLoaded", function(){
 
     </aside>
 
+
+
         <section class="tarefas">
 
-            <h1>Olá, {{$usuario->nomeUsuario ?? 'Usuário'}}!</h1>
+            <h1>Olá, {{$usuario->nomeUsuario}}!</h1>
         
             <p style="opacity:0.5">Você tem {{$totalTarefas}} tarefas em andamento.</p>
 

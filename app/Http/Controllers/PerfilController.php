@@ -18,6 +18,12 @@ class PerfilController extends Controller
         return view('usuario.perfil', compact('usuario'));
     }
 
+        public function indexApi()
+    {
+        $usuario = PerfilUsuario::latest('id')->first();
+
+        return $usuario;
+    }
 
 //mandar dados para pagina de perfil 2
         public function residencia()
@@ -47,6 +53,27 @@ class PerfilController extends Controller
     ]);
     
     return redirect()->route('login');
+    }
+
+        public function storeApi(Request $request)
+    {
+        //
+        $usuario = new PerfilUsuario();
+        $usuario->nomeUsuario = $request->nomeUsuario;
+        $usuario->emailUsuario = $request->emailUsuario;
+        $usuario->senhaUsuario = $request->senhaUsuario;
+        $usuario->datanascUsuario = $request->datanascUsuario;
+        $usuario->cepUsuario = $request->cepUsuario;
+        $usuario->logradouroUsuario = $request->logradouroUsuario;
+        $usuario->numlogradouroUsuario = $request->numlogradouroUsuario;
+        $usuario->complementoUsuario = $request->complementoUsuario;
+        $usuario->bairroUsuario = $request->bairroUsuario;
+        $usuario->cidadeUsuario = $request->cidadeUsuario;
+        $usuario->estadoUsuario = $request->estadoUsuario;
+        $usuario->created_at = date('Y-m-d H:i:s');
+        $usuario-> updated_at = date('Y-m-d H:i:s');
+        $usuario->save();
+    
     }
 
     public function update(Request $request, $id)

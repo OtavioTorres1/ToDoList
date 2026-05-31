@@ -25,6 +25,14 @@ class TarefasController extends Controller
             return view('home', compact('tarefas', 'totalTarefas', 'usuario'));
     }
 
+    public function tarefasApi()
+    {
+        //
+            $tarefas = Tarefas::all();
+
+            return $tarefas;
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -51,6 +59,22 @@ class TarefasController extends Controller
     ]);
     
     return redirect()->route('home');
+    }
+
+        public function storeApi(Request $request)
+    {
+        //
+        $tarefa = new Tarefas();
+        $tarefa->tituloTarefa = $request->tituloTarefa;
+        $tarefa->descTarefa = $request->descTarefa;
+        $tarefa->statusTarefa = $request->statusTarefa;
+        $tarefa->prioridadeTarefa = $request->prioridadeTarefa;
+        $tarefa->prazoTarefa = $request->prazoTarefa;
+        $tarefa->tb_usuario_id = $request->tb_usuario_id;
+        $tarefa->created_at = date('Y-m-d H:i:s');
+        $tarefa-> updated_at = date('Y-m-d H:i:s');
+        $tarefa->save();
+    
     }
 
 

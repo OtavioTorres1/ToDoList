@@ -103,6 +103,31 @@ class TarefasController extends Controller
 
     }
 
+    public function updateApi(Request $request, string $id)
+    {
+        $validarDados = $request->validate([            
+            'tituloTarefa'=>'min:3',
+            'descTarefa'=>'max:40',
+            'statusTarefa'=>'max:40',
+            'prioridadeTarefa'=>'max:40',
+            'prazoTarefa'=>'max:40',
+            'tb_usuario_id'=>'max:40',
+        ]);
+
+        $alterarTarefa = Tarefas::findOrFail($id);
+
+        $alterarTarefa -> update($validarDados);
+
+        return response()->json(
+            [
+                "mensagem" => 'Dados alterados com sucesso',
+                "contato" => $alterarTarefa
+            ],
+            200
+        );
+
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -110,6 +135,19 @@ class TarefasController extends Controller
      public function destroy($id)
     {
 
+    }
+
+    public function destroyApi(string $id)
+    {
+        $deletarTarefa = Tarefas::where('id',$id)->delete();
+
+        return response()->json(
+            [
+                "mensagem" => 'Dados excluídos com sucesso',
+                "tb_tarefa" => $deletarTarefa
+            ],
+            200
+        );        
     }
 
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Tarefas;
 use App\Models\PerfilUsuario;
+use App\Models\ComentarioTarefa;
 
 
 class TarefasController extends Controller
@@ -31,6 +32,16 @@ class TarefasController extends Controller
             $tarefas = Tarefas::all();
 
             return $tarefas;
+    }
+
+    public function ComentarioTarefa()
+    {
+        //
+            $comentario = ComentarioTarefa::all();
+
+            return $comentario;
+
+
     }
 
     /**
@@ -74,6 +85,34 @@ class TarefasController extends Controller
         $tarefa->created_at = date('Y-m-d H:i:s');
         $tarefa-> updated_at = date('Y-m-d H:i:s');
         $tarefa->save();
+    
+    }
+
+            public function storeComentario(Request $request)
+    {
+        //
+        $comentario = new ComentarioTarefa();
+        $comentario->conteudoComentario = $request->conteudoComentario;
+        $comentario->dataComentario = $request->dataComentario;
+        $comentario->tb_usuario_id = $request->tb_usuario_id;
+        $comentario->tb_tarefa_id = $request->tb_tarefa_id;
+        $comentario->created_at = date('Y-m-d H:i:s');
+        $comentario-> updated_at = date('Y-m-d H:i:s');
+        $comentario->save();
+    
+    }
+
+            public function storeComentarioApi(Request $request)
+    {
+        //
+        $comentario = new ComentarioTarefa();
+        $comentario->conteudoComentario = $request->conteudoComentario;
+        $comentario->dataComentario = $request->dataComentario;
+        $comentario->tb_usuario_id = $request->tb_usuario_id;
+        $comentario->tb_tarefa_id = $request->tb_tarefa_id;
+        $comentario->created_at = date('Y-m-d H:i:s');
+        $comentario-> updated_at = date('Y-m-d H:i:s');
+        $comentario->save();
     
     }
 
@@ -128,6 +167,29 @@ class TarefasController extends Controller
 
     }
 
+       public function updateComentarioApi(Request $request, string $id)
+    {
+        $validarDados = $request->validate([            
+            'conteudoComentario'=>'min:3',
+            'dataComentario'=>'max:40',
+            'tb_usuario_id'=>'max:40',
+            'tb_tarefa_id'=>'max:40',
+        ]);
+
+        $alterarComentario = ComentarioTarefa::findOrFail($id);
+
+        $alterarComentario -> update($validarDados);
+
+        return response()->json(
+            [
+                "mensagem" => 'Dados alterados com sucesso',
+                "contato" => $alterarComentario
+            ],
+            200
+        );
+
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -145,6 +207,19 @@ class TarefasController extends Controller
             [
                 "mensagem" => 'Dados excluídos com sucesso',
                 "tb_tarefa" => $deletarTarefa
+            ],
+            200
+        );        
+    }
+
+        public function destroyComentarioApi(string $id)
+    {
+        $deletarComentario = ComentarioTarefa::where('id',$id)->delete();
+
+        return response()->json(
+            [
+                "mensagem" => 'Dados excluídos com sucesso',
+                "tb_comentario" => $deletarComentario
             ],
             200
         );        

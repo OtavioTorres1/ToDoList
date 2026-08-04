@@ -27,6 +27,11 @@ use App\Http\Controllers\PerfilController;
  Route::delete('/deletarUsuario/{id}','App\Http\Controllers\PerfilController@destroyApi');
  Route::delete('/deletarComentario/{id}','App\Http\Controllers\TarefasController@destroyComentarioApi');
 
+ //Filtros
+ Route::get('/listarTarefaEspecifica','App\Http\Controllers\TarefasController@TarefaEspecificaApi');
+ Route::get('/listarUsuarioEspecifico','App\Http\Controllers\PerfilController@UsuarioEspecificoApi');
+
+
 
 
 

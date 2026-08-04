@@ -26,6 +26,70 @@ class TarefasController extends Controller
             return view('home', compact('tarefas', 'totalTarefas', 'usuario'));
     }
 
+
+
+    public function TarefasHoje()
+    {
+        //
+            $tarefas = Tarefas::all();
+            
+            $totalTarefas = Tarefas::where('prazoTarefa', today()->format('Y-m-d'))->count();
+            $TarefasHoje = Tarefas::where('prazoTarefa', today()->format('Y-m-d'))->get();
+            return view('tarefas/hoje', compact('tarefas', 'totalTarefas', 'TarefasHoje'));
+    }
+
+
+
+
+
+
+        public function TarefasSemana()
+    {
+        //
+            $tarefas = Tarefas::all();
+            
+            $totalTarefas = Tarefas::where('prazoTarefa', [today()->startOfWeek()->format('Y-m-d'), today()->endOfWeek()->format('Y-m-d')])->count();
+            $TarefasSemana = Tarefas::whereBetween('prazoTarefa', [today()->startOfWeek()->format('Y-m-d'), today()->endOfWeek()->format('Y-m-d')])->get();            
+            return view('tarefas/estaSemana', compact('tarefas', 'totalTarefas', 'TarefasSemana'));
+    }
+
+
+
+
+
+    public function TarefasConcluidas()
+    {
+        //
+            $tarefas = Tarefas::all();
+            $totalTarefas = Tarefas::where('statusTarefa', '=', 'Concluido')->count();
+            $listarTarefasConcluidas = Tarefas::where('statusTarefa', '=', 'Concluido')->get();
+    
+
+            return view('tarefas/concluidas', compact('tarefas', 'totalTarefas', 'listarTarefasConcluidas'));
+    }
+
+
+        public function TarefaEspecificaApi()
+    {
+        //
+            $listarTarefaEspecifica = Tarefas::where('id', '=', '5')->get();
+
+            return $listarTarefaEspecifica;
+    
+    }
+
+
+        public function TarefasImportantes()
+    {
+        //
+            $tarefas = Tarefas::all();
+            $totalTarefas = Tarefas::where('prioridadeTarefa', '=', 'Alta')->count();
+            $listarTarefasImportantes = Tarefas::where('prioridadeTarefa', '=', 'Alta')->get();
+    
+
+            return view('tarefas/importantes', compact('tarefas', 'totalTarefas', 'listarTarefasImportantes'));
+    }
+
     public function tarefasApi()
     {
         //
@@ -190,13 +254,50 @@ class TarefasController extends Controller
 
     }
 
+        public function editar(Request $request, string $id)
+    {
+        //
+
+       $validarDados = $request->validate([            
+            'tituloTarefa'=>'min:3',
+            'descTarefa'=>'max:40',
+            'statusTarefa'=>'max:40',
+            'prioridadeTarefa'=>'max:40',
+            'prazoTarefa'=>'max:40',
+            'tb_usuario_id'=>'max:40',
+        ]);
+
+            $usuario = PerfilUsuario::latest('id')->first();
+            $tarefa = Tarefas::findOrFail($id);
+
+            $tarefa -> update($validarDados);
+
+            return view('tarefas/editarTarefa', compact('tarefa', 'usuario'));
+    }
+
+          public function alterar($id)
+    {
+        //s
+
+            $usuario = PerfilUsuario::latest('id')->first();
+            $tarefa = Tarefas::findOrFail($id);
+
+            return view('tarefas/editarTarefa', compact('tarefa', 'usuario'));
+    }
+
 
     /**
      * Remove the specified resource from storage.
      */
      public function destroy($id)
     {
+        $tarefaDelete = Tarefas::findOrFail($id);
 
+        $tarefaDelete->delete();
+
+
+    
+            return view('home', compact('tarefaDelete'));
     }
 
     public function destroyApi(string $id)
@@ -210,6 +311,7 @@ class TarefasController extends Controller
             ],
             200
         );        
+
     }
 
         public function destroyComentarioApi(string $id)

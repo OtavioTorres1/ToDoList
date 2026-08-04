@@ -48,17 +48,17 @@ document.addEventListener("DOMContentLoaded", function(){
         </ul> 
         <ul>
             <a href="{{ route('importantes') }}">
-                <li>Importantes</li>
+            <li>Importantes</li>
             </a>
         </ul>
         <ul>
             <a href="{{ route('concluidas') }}">
-            <li class="ativo">Concluídas</li>
+            <li>Concluídas</li>
             </a>
         </ul>
         <ul>
             <a href="{{ route('semana') }}">
-                <li>Esta semana</li>
+                <li class="ativo">Esta semana</li>
             </a>
         </ul>
 
@@ -91,17 +91,17 @@ document.addEventListener("DOMContentLoaded", function(){
 
         <section class="tarefas">
 
-            <h1>Essas são suas tarefas concluídas!</h1>
+            <h1>Essas são suas tarefas desta Semana!</h1>
         
-            <p style="opacity:0.5">Você tem {{$totalTarefas}} tarefas Concluidas</p>
+            <p style="opacity:0.5">Você tem {{$totalTarefas}} tarefas para fazer dentro desta Semana</p>
 
 
             <br><br><br>
 
-            <h2>Tarefas de Hoje:</h2>
+            <h2>Tarefas desta Semana:</h2>
             <br>
             <div class="lista-tarefas">
-                @foreach($listarTarefasConcluidas as $t)
+                @foreach($TarefasSemana as $t)
 
                 <!-- Se tiver concluída: -->
                  @if($t->statusTarefa == 'Concluido')

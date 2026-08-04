@@ -28,7 +28,7 @@
             </div>
 
             <!-- FORM -->
-            <form action="{{ route('updateTarefa', $tarefa->id) }}" method="POST">
+            <form action="{{ route('editarTarefa', $tarefa->id) }}" method="POST">
 
                 @csrf
                 @method('PUT')

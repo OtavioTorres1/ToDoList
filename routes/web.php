@@ -21,6 +21,21 @@ Route::get('/NovaTarefa', function () {
     return view('usuario.NovaTarefa');
 })->name('NovaTarefaHome');
 
+Route::get('/hoje', function () {
+    return view('tarefas.hoje');
+})->name('hoje');
+
+Route::get('/concluidas', function () {
+    return view('tarefas.concluidas');
+})->name('concluidas');
+
+Route::get('/importantes', function () {
+    return view('tarefas.importantes');
+})->name('importantes');
+
+Route::get('/estaSemana', function () {
+    return view('tarefas.estaSemana');
+})->name('semana');
 
 
 
@@ -38,9 +53,17 @@ Route::post('/cadastro' , [PerfilController::class, 'store'])->name('cadastro');
 
 
 
-//Tarefa:
+//Tarefa:x
 
 Route::get('/home', [TarefasController::class, 'index'])->name('home');
+Route::get('/hoje', [TarefasController::class, 'TarefasHoje'])->name('hoje');
+Route::get('/estaSemana', [TarefasController::class, 'TarefasSemana'])->name('semana');
+Route::get('/importantes', [TarefasController::class, 'TarefasImportantes'])->name('importantes');
+Route::get('/concluidas', [TarefasController::class, 'TarefasConcluidas'])->name('concluidas');
+Route::get('/tarefa/{id}/alterar', [TarefasController::class, 'alterar'])->name('alterarTarefa');
+Route::put('/tarefa/{id}', [TarefasController::class, 'editar'])->name('editarTarefa');
+Route::delete('/tarefaDelete/{id}', [TarefasController::class, 'destroy'])->name('deletarTarefa');
+
 
 //nova tarefa
 Route::post('/NovaTarefa', [TarefasController::class, 'store'])->name('NovaTarefa');

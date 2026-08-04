@@ -13,6 +13,7 @@ class PerfilController extends Controller
     public function index()
     {
         $usuario = PerfilUsuario::latest('id')->first();
+        // $UsuarioEspecifico = PerfilUsuario::where()->get;
 
         return view('usuario.perfil', compact('usuario'));
     }
@@ -23,6 +24,19 @@ class PerfilController extends Controller
 
         return $usuario;
     }
+
+
+
+
+    public function UsuarioEspecificoApi()
+    {
+        //
+            $listarUsuarioEspecifico= PerfilUsuario::where('nomeUsuario', '=', 'Sofiha')->get('id');
+
+            return $listarUsuarioEspecifico;
+    
+    }
+    
 
 // Cadastro de novo Usuario:
     public function store(Request $request)

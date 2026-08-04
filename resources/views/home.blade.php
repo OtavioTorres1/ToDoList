@@ -38,9 +38,26 @@ document.addEventListener("DOMContentLoaded", function(){
 
         <ul>
             <li class="ativo">Todas</li>
-            <li>Hoje</li>
-            <li>Importantes</li>
-            <li>Concluídas</li>
+        </ul>
+        <ul>
+            <a href="{{ route('hoje') }}">
+                <li>Hoje</li>
+            </a>
+        </ul> 
+        <ul>
+            <a href="{{ route('importantes') }}">
+                <li>Importantes</li>
+            </a>
+        </ul>
+        <ul>
+            <a href="{{ route('concluidas') }}">
+                <li>Concluídas</li>
+            </a>
+        </ul>
+        <ul>
+            <a href="{{ route('semana') }}">
+                <li>Esta semana</li>
+            </a>
         </ul>
 
         <hr>
@@ -68,7 +85,16 @@ document.addEventListener("DOMContentLoaded", function(){
     </aside>
 
 
-
+        @if($totalTarefas == 0)
+        <section class="tarefas">
+        <div>
+            <h1 style="text-align: center; color: red">Você ainda não tem terefas.</h1>
+            <a href="{{ route('NovaTarefaHome') }}" class="btn-add">
+                +
+            </a>
+        </div>
+        </section>
+        @else
         <section class="tarefas">
 
             <h1>Olá, {{$usuario->nomeUsuario}}!</h1>
@@ -78,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
             <br><br><br>
 
-            <h2>Tarefas de Hoje:</h2>
+            <h2>Suas tarefas:</h2>
             <br>
             <div class="lista-tarefas">
                 @foreach($tarefas as $t)
@@ -92,24 +118,29 @@ document.addEventListener("DOMContentLoaded", function(){
 
                             <p>
                                 @if($t->statusTarefa == 'Concluido')
-                                <span style="background-color: #90EE90; color: #228B22; white; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Concluído</span>
+                                <span style="background-color: #90EE90; color: #228B22; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Concluído</span>
 
                                 @elseif($t->statusTarefa == 'em andamento')
-                                <span style="background-color: #1E90FF; color: white; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;"">Em andamento</span>
+                                <span style="background-color: #1E90FF; color: white; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Em andamento</span>
 
                                 @else
                                 <span style="background-color: #d4d4d4; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Pendente</span>
                                 @endif
                             </p>
 
-                                <a>
-                                    <img src="{{ url('images/lixo.png') }}" alt="">
-                                </a>
-                            
-                                <a>
-                                    <img src="{{ url('images/editar.png') }}" alt="">
-                                </a>
+                           
+                                <form action="{{ route('deletarTarefa', $t->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
 
+                                    <input type="image"
+                                       src="{{ url('images/lixo.png') }}" alt="Excluir"
+                                       width="30px"
+                                       height="30px"
+                                    >
+                                </form>
+                  
+                            
 
                         </div>
 
@@ -122,23 +153,36 @@ document.addEventListener("DOMContentLoaded", function(){
 
                             <p>
                                 @if($t->statusTarefa == 'Concluido')
-                                <span style="background-color: #90EE90; color: #228B22; white; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Concluído</span>
+                                <span style="background-color: #90EE90; color: #228B22; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Concluído</span>
 
                                 @elseif($t->statusTarefa == 'Em andamento')
-                                <span style="background-color: #1E90FF; color: white; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;"">Em andamento</span>
+                                <span style="background-color: #1E90FF; color: white; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Em andamento</span>
 
                                 @else
                                 <span style="background-color: #d4d4d4; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Pendente</span>
                                 @endif
                             </p>
 
-                                <a>
-                                    <img src="{{ url('images/lixo.png') }}" alt="">
-                                </a>
+                           
+                                <form action="{{ route('deletarTarefa', $t->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <input type="image"
+                                       src="{{ url('images/lixo.png') }}" alt="Excluir"
+                                       width="30px"
+                                       height="30px"
+                                    >
+                                </form>
+                   
                             
-                                <a>
+                        
+
+                                <a href="{{ route('alterarTarefa', ['id' => $t->id]) }}">
                                     <img src="{{ url('images/editar.png') }}" alt="">
                                 </a>
+
+                           
 
                         </div>
                         @endif
@@ -148,12 +192,14 @@ document.addEventListener("DOMContentLoaded", function(){
                 @endforeach
                 </div>
           
-        </section>
-        <a href="{{ route('NovaTarefaHome') }}" class="btn-add">
-            +
-        </a>
-</div>  
-        
+            </section>
+                <a href="{{ route('NovaTarefaHome') }}" class="btn-add">
+                    +
+                </a>
+        </div>  
+
+
+    @endif
     </main>
 
        @include('layouts.footer')

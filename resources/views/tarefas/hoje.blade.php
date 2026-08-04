@@ -37,11 +37,31 @@ document.addEventListener("DOMContentLoaded", function(){
         <h3>Filtros:</h3>
 
         <ul>
+            <a href="{{ route('home') }}">
             <li>Todas</li>
-            <li class="ativo">Hoje</li>
-            <li>Importantes</li>
-            <li>Concluídas</li>
+            </a>
         </ul>
+        <ul>
+            <a href="{{ route('hoje') }}">
+            <li class="ativo">Hoje</li>
+            </a>
+        </ul> 
+        <ul>
+            <a href="{{ route('importantes') }}">
+            <li>Importantes</li>
+            </a>
+        </ul>
+        <ul>
+            <a href="{{ route('concluidas') }}">
+            <li>Concluídas</li>
+            </a>
+        </ul>
+        <ul>
+            <a href="{{ route('semana') }}">
+                <li>Esta semana</li>
+            </a>
+        </ul>
+
 
         <hr>
 
@@ -67,11 +87,13 @@ document.addEventListener("DOMContentLoaded", function(){
 
     </aside>
 
+
+
         <section class="tarefas">
 
-            <h1>Olá, {{$usuario->nomeUsuario ?? 'Usuário'}}!</h1>
+            <h1>Essas são suas tarefas de Hoje!</h1>
         
-            <p style="opacity:0.5">Você tem {{$totalTarefasC}} tarefas concluidas.</p>
+            <p style="opacity:0.5">Você tem {{$totalTarefas}} tarefas com prazo até hoje</p>
 
 
             <br><br><br>
@@ -79,41 +101,35 @@ document.addEventListener("DOMContentLoaded", function(){
             <h2>Tarefas de Hoje:</h2>
             <br>
             <div class="lista-tarefas">
-                @foreach($hojeTarefas as $t)
+                @foreach($TarefasHoje as $t)
 
                 <!-- Se tiver concluída: -->
-                 @if($t->statusTarefa == 'concluida')
+                 @if($t->statusTarefa == 'Concluido')
                     <div class="cards-tarefas" style="background-color: rgba(255, 255, 255, 0.2);">
                         <s>{{ $t->tituloTarefa}}</s>
 
                         <s style="opacity: 0.5">até {{$t->prazoTarefa}}</s>
 
                             <p>
-                                @if($t->statusTarefa == 'concluida')
-                                <span style="background-color: #90EE90; color: #228B22; white; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Concluído</span>
+                                @if($t->statusTarefa == 'Concluido')
+                                <span style="background-color: #90EE90; color: #228B22; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Concluído</span>
 
-                                @elseif($t->statusTarefa == 'Em andamento')
-                                <span style="background-color: #1E90FF; color: white; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;"">Em andamento</span>
+                                @elseif($t->statusTarefa == 'em andamento')
+                                <span style="background-color: #1E90FF; color: white; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Em andamento</span>
 
                                 @else
                                 <span style="background-color: #d4d4d4; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Pendente</span>
                                 @endif
                             </p>
 
-                                <form action="{{ route('deletarTarefa', $t->id) }}" method="POST"  onsubmit="return confirm('Tem certeza que deseja excluir essa tarefa?')">
-
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button type="submit" style="border:none; background:none; cursor:pointer;">
-                                        <img src="{{url('images/lixo.png')}}" alt="">
-                                    </button>
-
-                                </form>
-                            
-                                <a href="{{ route('home') }}">
-                                    <img src="{{url('images/editar.png')}}" alt="" style="opacity: 0.5;">
+                                <a>
+                                    <img src="{{ url('images/lixo.png') }}" alt="">
                                 </a>
+                            
+                                <a>
+                                    <img src="{{ url('images/editar.png') }}" alt="">
+                                </a>
+
 
                         </div>
 
@@ -125,30 +141,23 @@ document.addEventListener("DOMContentLoaded", function(){
                         <p style="opacity: 0.5">até {{$t->prazoTarefa}}</p>
 
                             <p>
-                                @if($t->statusTarefa == 'concluida')
-                                <span style="background-color: #90EE90; color: #228B22; white; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Concluído</span>
+                                @if($t->statusTarefa == 'Concluido')
+                                <span style="background-color: #90EE90; color: #228B22; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Concluído</span>
 
                                 @elseif($t->statusTarefa == 'Em andamento')
-                                <span style="background-color: #1E90FF; color: white; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;"">Em andamento</span>
+                                <span style="background-color: #1E90FF; color: white; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Em andamento</span>
 
                                 @else
                                 <span style="background-color: #d4d4d4; border-radius: 30px; padding: 10px; font-size:15px; font-family: Arial, Helvetica, sans-serif;">Pendente</span>
                                 @endif
                             </p>
 
-                                <form action="{{ route('deletarTarefa', $t->id) }}" method="POST"  onsubmit="return confirm('Tem certeza que deseja excluir essa tarefa?')">
-
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button type="submit" style="border:none; background:none; cursor:pointer;">
-                                        <img src="{{url('images/lixo.png')}}" alt="">
-                                    </button>
-
-                                </form>
+                                <a>
+                                    <img src="{{ url('images/lixo.png') }}" alt="">
+                                </a>
                             
-                                <a href="{{ route('home') }}">
-                                    <img src="{{url('images/editar.png')}}" alt="">
+                                <a>
+                                    <img src="{{ url('images/editar.png') }}" alt="">
                                 </a>
 
                         </div>

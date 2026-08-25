@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\TarefasController;
+use App\Http\Controllers\ComentarioController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +65,9 @@ Route::get('/concluidas', [TarefasController::class, 'TarefasConcluidas'])->name
 Route::get('/tarefa/{id}/alterar', [TarefasController::class, 'alterar'])->name('alterarTarefa');
 Route::put('/tarefa/{id}', [TarefasController::class, 'editar'])->name('editarTarefa');
 Route::delete('/tarefaDelete/{id}', [TarefasController::class, 'destroy'])->name('deletarTarefa');
+
+//Comentario
+Route::post('/home/{id}', [ComentarioController::class, 'store'])->name('CriarComentario');
 
 
 //nova tarefa

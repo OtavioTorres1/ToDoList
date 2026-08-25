@@ -20,6 +20,14 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 
+function abrirModal() {
+    document.getElementById('modal').style.display = 'flex';
+}
+
+function fecharModal() {
+    document.getElementById('modal').style.display = 'none';
+}
+
 </script>
 
 </head>
@@ -139,8 +147,10 @@ document.addEventListener("DOMContentLoaded", function(){
                                        height="30px"
                                     >
                                 </form>
-                  
-                            
+
+                            <a href="" onclick="abrirModal(); return false;">
+                                <img src="{{ url('images/comentar.png') }}" alt="">
+                           </a>
 
                         </div>
 
@@ -182,7 +192,9 @@ document.addEventListener("DOMContentLoaded", function(){
                                     <img src="{{ url('images/editar.png') }}" alt="">
                                 </a>
 
-                           
+                           <a href="" onclick="abrirModal(); return false;">
+                            <img src="{{ url('images/comentar.png') }}" alt="">
+                           </a>
 
                         </div>
                         @endif
@@ -192,6 +204,53 @@ document.addEventListener("DOMContentLoaded", function(){
                 @endforeach
                 </div>
           
+<div id="modal" class="modal">
+
+    <div class="modal-conteudo">
+
+        <div class="headerModal">
+
+            <a class="fechar" onclick="fecharModal()">
+                <img src="{{ url('images/exit.png') }}" alt="">
+            </a>
+
+            <h2>Adicionar comentario</h2>
+        </div>
+        
+        <form action="{{ route('CriarComentario') }}" method="POST">
+                    @csrf
+
+            <div style="display:flex; flex-direction: row; gap: 50px;">
+                <div class="idUsuarioModal">
+                    <label>Conteúdo</label>
+                    <textarea name="conteudoComentario" placeholder="Conteúdo do Comentario" id=""></textarea>
+                </div>
+
+                <div class="idUsuarioModal">
+                    <label>Data do comentario:</label>
+                    <input type="date" name="dataComentario" required>
+                </div>
+            </div>
+
+            <div style="display:flex; flex-direction: row; gap: 50px;">
+                <div class="idUsuarioModal">
+                    <label>ID do Usuário</label>
+                    <input type="number" name="tb_usuario_id" required>
+                </div>
+
+                <div class="idUsuarioModal">
+                    <label>ID da Tarefa</label>
+                    <input type="number" name="tb_tarefa_id" required>
+                </div>
+            </div>
+
+            <button type="submit" class="enviar-btn">Enviar</button>
+        </form>
+
+    </div>
+
+</div>
+
             </section>
                 <a href="{{ route('NovaTarefaHome') }}" class="btn-add">
                     +

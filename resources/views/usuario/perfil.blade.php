@@ -44,7 +44,7 @@
 
             <div class="campo">
                 <label>Nome:</label>
-                <p>{{ $usuario->nomeUsuario }}</p>
+                <p>{{ $usuario->name }}</p>
             </div>
 
             <div class="campo">
@@ -54,7 +54,7 @@
 
             <div class="campo">
                 <label>Email:</label>
-                <p>{{ $usuario->emailUsuario }}</p>
+                <p>{{ $usuario->email }}</p>
             </div>
 
         </div>

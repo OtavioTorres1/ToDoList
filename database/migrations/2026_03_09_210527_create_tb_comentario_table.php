@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('conteudoComentario');
             $table->date('dataComentario');
-            $table->foreignId('tb_usuario_id')->constrained('tb_usuario');
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('tb_tarefa_id')->constrained('tb_tarefa');
             $table->timestamps();
         });

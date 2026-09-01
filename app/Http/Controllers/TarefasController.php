@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Tarefas;
+use App\Models\User;
 use App\Models\PerfilUsuario;
 use App\Models\ComentarioTarefa;
 
@@ -19,7 +20,7 @@ class TarefasController extends Controller
     public function index()
     {
         //
-    $usuario = PerfilUsuario::latest('id')->first();
+    $usuario = User::latest('id')->first();
             $tarefas = Tarefas::all();
             $totalTarefas = Tarefas::where('statusTarefa', 'Em andamento')->count();
 
@@ -267,7 +268,7 @@ class TarefasController extends Controller
             'tb_usuario_id'=>'max:40',
         ]);
 
-            $usuario = PerfilUsuario::latest('id')->first();
+            $usuario = User::latest('id')->first();
             $tarefa = Tarefas::findOrFail($id);
 
             $tarefa -> update($validarDados);
@@ -279,7 +280,7 @@ class TarefasController extends Controller
     {
         //s
 
-            $usuario = PerfilUsuario::latest('id')->first();
+            $usuario = User::latest('id')->first();
             $tarefa = Tarefas::findOrFail($id);
 
             return view('tarefas/editarTarefa', compact('tarefa', 'usuario'));

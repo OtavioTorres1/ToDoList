@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PerfilUsuario;
 use Illuminate\Support\Facades\Http;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Support\Facades\Hash;
 
 class PerfilController extends Controller
 {
@@ -12,7 +16,7 @@ class PerfilController extends Controller
 //mandar dados para pagina de perfil
     public function index()
     {
-        $usuario = PerfilUsuario::latest('id')->first();
+        $usuario = User::latest('id')->first();
         // $UsuarioEspecifico = PerfilUsuario::where()->get;
 
         return view('usuario.perfil', compact('usuario'));
@@ -20,18 +24,24 @@ class PerfilController extends Controller
 
         public function indexApi()
     {
-        $usuario = PerfilUsuario::latest('id')->first();
+        $usuario = User::latest('id')->first();
 
         return $usuario;
     }
 
+    public function residencia()
+    {
+        $usuario = User::latest('id')->first();
+        // $UsuarioEspecifico = PerfilUsuario::where()->get;
 
+        return view('usuario.residencia', compact('usuario'));
+    }
 
 
     public function UsuarioEspecificoApi()
     {
         //
-            $listarUsuarioEspecifico= PerfilUsuario::where('nomeUsuario', '=', 'Sofiha')->get('id');
+            $listarUsuarioEspecifico= User::where('nomeUsuario', '=', 'Sofiha')->get('id');
 
             return $listarUsuarioEspecifico;
     
@@ -42,10 +52,10 @@ class PerfilController extends Controller
     public function store(Request $request)
     {
         //
-        $usuario = new PerfilUsuario();
-        $usuario->nomeUsuario = $request->nomeUsuario;
-        $usuario->emailUsuario = $request->emailUsuario;
-        $usuario->senhaUsuario = $request->senhaUsuario;
+        $usuario = new User();
+        $usuario->name = $request->nomeUsuario;
+        $usuario->email = $request->emailUsuario;
+        $usuario -> password = Hash::make($request->senhaUsuario);
         $usuario->datanascUsuario = $request->datanascUsuario;
         $usuario->cepUsuario = $request->cepUsuario;
         $usuario->logradouroUsuario = $request->logradouroUsuario;
@@ -64,10 +74,10 @@ class PerfilController extends Controller
         public function storeApi(Request $request)
     {
         //
-        $usuario = new PerfilUsuario();
-        $usuario->nomeUsuario = $request->nomeUsuario;
-        $usuario->emailUsuario = $request->emailUsuario;
-        $usuario->senhaUsuario = $request->senhaUsuario;
+        $usuario = new User();
+        $usuario->name = $request->nomeUsuario;
+        $usuario->email = $request->emailUsuario;
+        $usuario -> password = Hash::make($request->senhaUsuario);
         $usuario->datanascUsuario = $request->datanascUsuario;
         $usuario->cepUsuario = $request->cepUsuario;
         $usuario->logradouroUsuario = $request->logradouroUsuario;
@@ -102,7 +112,7 @@ class PerfilController extends Controller
             'estadoUsuario'=>'max:40',
         ]);
 
-        $alterarUsuario = PerfilUsuario::findOrFail($id);
+        $alterarUsuario = User::findOrFail($id);
 
         $alterarUsuario -> update($validarDados);
 
@@ -123,7 +133,7 @@ class PerfilController extends Controller
 
         public function destroyApi(string $id)
     {
-        $deletarUsuario = PerfilUsuario::where('id',$id)->delete();
+        $deletarUsuario = User::where('id',$id)->delete();
 
         return response()->json(
             [
@@ -132,6 +142,20 @@ class PerfilController extends Controller
             ],
             200
         );        
+    }
+
+     public function fazerLogin(Request $request){
+        if(!Auth::attempt($request->only(['email','password']))){
+            return redirect('login');
+        }
+            else{
+                return redirect('/home');
+            }
+    }
+
+    public function fazerLogOut(Request $request){
+        Auth::logout();
+        return redirect('login');
     }
 
     public function create()

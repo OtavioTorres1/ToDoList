@@ -21,22 +21,24 @@
 
             </div>
             <div class="infosUsuario">
-                
+                <form action="/fazerLogin" method="POST">
+                @csrf
                 <div>
                     <label>Email</label>
-                    <input type="text" placeholder="Email:" name="txEmail">
+                    <input type="text" placeholder="Email:" name="email">
                 </div>
 
                 <div>
                     <label>Senha</label>
-                    <input type="password" placeholder="Senha:" name="txSenha">
+                    <input type="password" placeholder="Senha:" name="password">
                 </div>
            
             </div>
             <div style="display: flex; flex-direction: column; gap: 10px;">
-                <a href="{{ route('home') }}" class="enviar-btn">Entrar</a>
-                <a href="{{ route('cadastro') }}" class="cadastro-btn">Ainda não tem uma conta? faça seu cadastro</a>
+                <input type="submit" value="Entrar">
+                <a href="{{ route('cadastro.form') }}" class="cadastro-btn">Ainda não tem uma conta? faça seu cadastro</a>
             </div>
+            </form>
         </div>
 
     </main>

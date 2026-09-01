@@ -42,22 +42,22 @@ document.addEventListener("DOMContentLoaded", function(){
             </a>
         </ul>
         <ul>
-            <a href="{{ route('hoje') }}">
+            <a href="/hoje">
             <li>Hoje</li>
             </a>
         </ul> 
         <ul>
-            <a href="{{ route('importantes') }}">
+            <a href="/importantes">
                 <li>Importantes</li>
             </a>
         </ul>
         <ul>
-            <a href="{{ route('concluidas') }}">
+            <a href="/concluidas">
             <li class="ativo">Concluídas</li>
             </a>
         </ul>
         <ul>
-            <a href="{{ route('semana') }}">
+            <a href="/seamana">
                 <li>Esta semana</li>
             </a>
         </ul>
@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 </div>
           
         </section>
-        <a href="{{ route('NovaTarefaHome') }}" class="btn-add">
+        <a href="/NovaTarefa" class="btn-add">
             +
         </a>
 </div>  

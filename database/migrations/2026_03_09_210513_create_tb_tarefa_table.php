@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('statusTarefa');
             $table->string('prioridadeTarefa');
             $table->string('prazoTarefa');
-            $table->foreignId('tb_usuario_id')->constrained('tb_usuario');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

@@ -87,7 +87,7 @@ function fecharModal() {
         </ul>
 
         <ul>
-            <a href="{{ route('login') }}"  style="color: red;" ><li>Log-out</li></a>
+            <a href="/logout"  style="color: red;" ><li>Log-out</li></a>
         </ul>
 
     </aside>
